@@ -4,7 +4,7 @@ const fs = require('fs')
 const en = require(process.argv[2])
 const URL = 'https://translate.google.com/#view=home&op=translate'
 
-const destiny = 'en';
+const destiny = 'es';
 const target = process.argv[3];
 
 
@@ -14,13 +14,16 @@ const target = process.argv[3];
         const page = await browser.newPage()
         let val = ""
         await page.goto(`${URL}&sl=${destiny}&tl=${target}&text=${value}`)
-        await page.waitForSelector('.tlid-trans-verified-button.trans-verified-button',{timeout: 6000})
+        await page.waitFor(2000,{timeout: 6000})
             .then(async() => {
-                const translate = await page.evaluate(() => document.querySelector('.tlid-translation.translation').textContent)
-                console.log('>>>', key, translate)
+                const h2 = await page.evaluate(() => document.querySelector('body').innerHTML)
+                const regex = new RegExp(`data-language-code=\"${target}\" data-language-name=\".+\" data-text=\"(.+)\" data-crosslingual-hint`)
+                const translate = h2.match(regex)[1]
+                
+                console.log('->', key, translate)
                 val = translate
             })
-            .catch(() => {})
+            .catch((err) => {console.log('err', err)})
         await page.close()
         return val
     })
