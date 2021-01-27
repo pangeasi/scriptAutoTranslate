@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "minimist": ">=1.2.2",
-    "puppeteer": "2.1.1"
+    "puppeteer": "^5.5.0"
   },
   "keywords": [],
   "author": "",
