@@ -30,6 +30,8 @@ const target = process.argv[3];
 
     await browser.close()
     const pathTarget = `${process.argv[2].split('/')[1]}Translated`
-    await fs.mkdirSync(pathTarget)
+    
+    if (!fs.existsSync(pathTarget)) fs.mkdirSync(pathTarget)
+
     fs.writeFileSync(`./${pathTarget}/${target}.json`, JSON.stringify(targetFileContent, JSON, 2), {flag: 'w'})
 })();
