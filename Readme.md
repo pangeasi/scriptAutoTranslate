@@ -4,4 +4,4 @@ to run script:
 
 all args required:
 * pathFile/where/origin/en.json
-* languageCode (2 digits)
+* languageCode (2 digits) [link](https://cloud.google.com/translate/docs/languages)
